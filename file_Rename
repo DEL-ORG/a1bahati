@@ -1,15 +1,48 @@
-
 version: '3'
 services:
-  web:
-    image: python:3.8-alpine
-    command: python app.py
-    volumes:
-      - ./app:/app
+  webapp:
+    image: nginx:latest
     ports:
-      - "5000:5000"
-    depends_on:
-      - redis
-  
+      - "80:80"
+    networks:
+      - frontend
+    volumes:
+      - webapp-data:/usr/share/nginx/html
+  api:
+    image: node:14
+    command: npm start
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - api-data:/app
+    ports:
+      - "3000:3000"
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    networks:
+      - backend
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  cache:
+    image: redis:alpine
+    networks:
+      - backend
+    volumes:
+      - cache-data:/data
+    ports:
+      - "6379:6379"
+  worker:
+    image: python:3.9
+    command: python worker.py
+    networks:
+      - backend
+    volumes:
+      - worker-data:/app
 
-made change to thsi file for est 
