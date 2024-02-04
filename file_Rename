@@ -46,3 +46,12 @@ services:
     volumes:
       - worker-data:/app
 
+networks:
+  frontend:
+  backend:
+volumes:
+  webapp-data:
+  api-data:
+  db-data:
+  cache-data:
+  worker-data:
