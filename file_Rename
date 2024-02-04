@@ -8,16 +8,7 @@ services:
       - frontend
     volumes:
       - webapp-data:/usr/share/nginx/html
-  api:
-    image: node:14
-    command: npm start
-    networks:
-      - frontend
-      - backend
-    volumes:
-      - api-data:/app
-    ports:
-      - "3000:3000"
+
   database:
     image: postgres:latest
     environment:
@@ -45,6 +36,16 @@ services:
       - backend
     volumes:
       - worker-data:/app
+  api:
+    image: node:14
+    command: npm start
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - api-data:/app
+    ports:
+      - "3000:3000"
 
 networks:
   frontend:
