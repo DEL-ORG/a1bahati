@@ -21,21 +21,7 @@ services:
       - db-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  cache:
-    image: redis:alpine
-    networks:
-      - backend
-    volumes:
-      - cache-data:/data
-    ports:
-      - "6379:6379"
-  worker:
-    image: python:3.9
-    command: python worker.py
-    networks:
-      - backend
-    volumes:
-      - worker-data:/app
+  
   api:
     image: node:14
     command: npm start
