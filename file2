@@ -1,14 +1,13 @@
-
-version: '3'
-services:
-  web:
-    image: python:3.8-alpine
-    command: python app.py
-    volumes:
-      - ./app:/app
-    ports:
-      - "5000:5000"
-    depends_on:
-      - redis
-  redis:
-    image: "redis:alpine"
+#version: '3'
+#services:
+  #web:
+    #image: python:3.8-alpine
+    #command: python app.py
+    #volumes:
+     # - ./app:/app
+    #ports:
+      #- "5000:5000"
+   # depends_on:
+      #- redis
+  #redis:
+   # image: "redis:alpine"
